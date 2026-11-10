@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routing App - Menu</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Routing App</h1>
+      <p>Praktikum Routing pada Web Server JavaScript (Express.js)</p>
+    </header>
+
+    <div class="card">
+      <h2>Aktivitas 1 - Routing Dasar</h2>
+      <div class="links">
+        <a class="btn" href="/" target="_blank">/</a>
+        <a class="btn" href="/about" target="_blank">/about</a>
+        <a class="btn" href="/contact" target="_blank">/contact</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Aktivitas 2 - Parameter Dinamis</h2>
+      <div class="links">
+        <a class="btn" href="/produk/A12" target="_blank">/produk/A12</a>
+        <a class="btn" href="/produk/B25" target="_blank">/produk/B25</a>
+      </div>
+      <div class="row">
+        <input type="text" id="kode" placeholder="kode produk" value="C30">
+        <button class="btn" onclick="window.open('/produk/' + encodeURIComponent(document.getElementById('kode').value), '_blank')">Buka</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Aktivitas 3 - Simulasi CRUD</h2>
+      <div class="row">
+        <button class="btn get"    onclick="kirim('GET', '/users')">GET /users</button>
+        <button class="btn post"   onclick="kirim('POST', '/users')">POST /users</button>
+        <button class="btn put"    onclick="kirim('PUT', '/users/2')">PUT /users/2</button>
+        <button class="btn delete" onclick="kirim('DELETE', '/users/3')">DELETE /users/3</button>
+      </div>
+      <p style="margin:12px 0 6px;color:#94a3b8;font-size:.9rem">Respon dari server:</p>
+      <pre id="hasil">Klik salah satu tombol di atas.</pre>
+    </div>
+
+    <footer>Server berjalan di <code>http://localhost:3000</code></footer>
+  </div>
+
+  <script>
+    async function kirim(metode, url) {
+      const out = document.getElementById('hasil');
+      try {
+        const r = await fetch(url, { method: metode });
+        const teks = await r.text();
+        out.textContent = metode + ' ' + url + '\nStatus: ' + r.status + '\n\n' + teks;
+      } catch (e) {
+        out.textContent = 'Gagal menghubungi server: ' + e.message;
+      }
+    }
+  </script>
+</body>
+</html>
