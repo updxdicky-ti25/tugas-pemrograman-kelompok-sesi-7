@@ -1,0 +1,13 @@
+{
+  "name": "routing-app-baru",
+  "version": "1.0.0",
+  "description": "Praktikum Routing pada Web Server JavaScript (Express.js)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "tim": "node tim.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
